@@ -1,0 +1,27 @@
+server: 
+  tomcat:
+    maxHttpHeaderSize: 3145728
+  port: 10090
+  servlet: 
+    contextPath: /auth #web基路径
+  mvc:
+    view: 
+      prefix: /templates/
+      suffix: .html 
+      
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10088/eureka/
+
+spring:
+  application:
+    name: cloud-auth
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/token?useUnicode=yes&characterEncoding=UTF-8
+    username: root
+    password: 123456
+
+ 
+  

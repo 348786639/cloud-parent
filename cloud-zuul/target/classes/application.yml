@@ -1,0 +1,56 @@
+server: 
+  port: 10086
+
+spring:
+  application:
+    name: cloud-zuul
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/zuul-routes?useUnicode=true&characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    
+mybatis:
+  type-aliases-package: com.ding.entity
+  mapper-locations: classpath*:com/ding/mapper/xml/**.xml
+  base-package: com.ding.mapper
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:10088/eureka/
+
+zuul:
+  sensitiveHeaders:
+  add-host-header: true
+  routes:
+    cloud-order:
+      path: /order/**
+      serviceId: cloud-order
+    cloud-member:
+      path: /member/**
+      serviceId: cloud-member          
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    client:
+      client-id: cloud-zuul
+      client-secret: 123456
+      #user-authorization-uri: http://127.0.0.1:10090/auth/oauth/authorize
+      access-token-uri: http://127.0.0.1:10090/auth/oauth/token
+      #pre-established-redirect-uri: http://127.0.0.1:10086/callBack
+      #registered-redirect-uri: http://127.0.0.1:10086/callBack
+      use-current-uri: false
+    resource:
+      user-info-uri: http://127.0.0.1:10090/auth/member       #怎么配置
+      #jwt:
+        #key-value: springcloud123 #使用对称加密方式，默认算法为HS256
+
+self: #自定义的信息
+  grant-type: authorization_code        
+  
+  
+  
+  
