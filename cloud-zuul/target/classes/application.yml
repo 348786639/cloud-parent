@@ -24,6 +24,9 @@ zuul:
   sensitiveHeaders:
   add-host-header: true
   routes:
+    cloud-auth:
+      path: /auth2/**
+      serviceId: cloud-auth
     cloud-order:
       path: /order/**
       serviceId: cloud-order
@@ -41,7 +44,7 @@ security:
       #user-authorization-uri: http://127.0.0.1:10090/auth/oauth/authorize
       access-token-uri: http://127.0.0.1:10090/auth/oauth/token
       #pre-established-redirect-uri: http://127.0.0.1:10086/callBack
-      #registered-redirect-uri: http://127.0.0.1:10086/callBack
+      registered-redirect-uri: http://127.0.0.1:10086/callBack
       use-current-uri: false
     resource:
       user-info-uri: http://127.0.0.1:10090/auth/member       #怎么配置

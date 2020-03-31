@@ -19,9 +19,9 @@ public class BaseUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		List<GrantedAuthority> authorities = new ArrayList();
-		GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN");
+		GrantedAuthority authority = new SimpleGrantedAuthority("ADMIN1");
 		authorities.add(authority);
-		org.springframework.security.core.userdetails.User user =  new org.springframework.security.core.userdetails.User("admin",
+		org.springframework.security.core.userdetails.User user =  new org.springframework.security.core.userdetails.User(username,
                 "123456", true, true, true, true, authorities);
 		return new BaseUser(user);
 	}

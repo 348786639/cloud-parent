@@ -45,7 +45,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         return provider;
     }
     
-    @Bean
+    @Override
+	protected void configure(HttpSecurity http) throws Exception {
+    	http
+		.authorizeRequests()
+		.antMatchers("/member/**").permitAll().and().csrf().disable();
+	}
+
+	@Bean
     public static NoOpPasswordEncoder passwordEncoder() {
       return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }

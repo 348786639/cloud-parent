@@ -10,11 +10,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
- @Override 
-	protected void configure(HttpSecurity http) throws Exception { http
-	 .authorizeRequests().anyRequest() .authenticated()
-	 .antMatchers("/login/**","/callBack/**","/dynamicZuul/**","/callBack/login/**") .permitAll()
-	 .and() .csrf() .disable(); }
+	@Override 
+	protected void configure(HttpSecurity http) throws Exception { 
+		//错误写法  放行不了会报401  不知道为什么放行不了  不知道为什么会401
+		//http
+	 	//.authorizeRequests().anyRequest() .authenticated()
+	 	//.antMatchers("/login/**","/callBack/**","/dynamicZuul/**","/callBack/login/**","/order/**") .permitAll()
+	 	//.and() .csrf() .disable(); 
+	    //正确写法，不知道为什么
+		http
+		.authorizeRequests()
+		.antMatchers("/callBack/**", "/order/**","/auth2/**").permitAll().and().csrf().disable();
+		//.antMatchers("/admin/**").hasRole("ADMIN")
+		//.antMatchers("/db/**").access("hasRole('ADMIN') and hasRole('DBA')")
+		//.anyRequest().authenticated();
+		
+		//.csrf().disable(); 不写这个 403 post
+	}
  
 //注释的才会放行
 // http

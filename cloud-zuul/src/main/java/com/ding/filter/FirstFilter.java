@@ -20,7 +20,7 @@ public class FirstFilter extends ZuulFilter{
 	 */
 	@Override
 	public boolean shouldFilter() {
-		return false;
+		return true;
 	}
 	/**
 	 * 定义同类型的Filter的执行顺序

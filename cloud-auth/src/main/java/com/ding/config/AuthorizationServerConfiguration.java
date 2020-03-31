@@ -52,16 +52,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
 	/**
 	 * 不加的话通过授权码获取token会401
+	 * @throws Exception 
 	 */
 	 @Override
-    public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
+    public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         //oauthServer.allowFormAuthenticationForClients();
         //oauthServer.tokenKeyAccess("permitAll()");
         oauthServer
         .tokenKeyAccess("permitAll()")
         .checkTokenAccess("permitAll()")
         .allowFormAuthenticationForClients();
-
     }
 	
 	@Bean("jdbcClientDetailsService")
